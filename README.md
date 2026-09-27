@@ -1,4 +1,4 @@
-# Aayush Bharadwaj — AI / ML Portfolio
+# Aayush Bharadwaj: AI / ML Portfolio
 
 A static, recruiter-facing portfolio focused on data science, data analysis, machine learning, applied AI, AI engineering, and AI agent evaluation, with computational physics and scientific computing as quantitative foundations.
 

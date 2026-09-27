@@ -7,7 +7,7 @@
 window.PORTFOLIO_PROJECTS = Object.freeze([
   {
     id: "honda-agent-evaluation",
-    name: "Honda — Agent Evaluation",
+    name: "Honda: Agent Evaluation",
     shortName: "Agent Evaluation",
     tier: 1,
     category: "AI Agent Evaluation / AI Engineering / Data Science",
@@ -26,7 +26,7 @@ window.PORTFOLIO_PROJECTS = Object.freeze([
   },
   {
     id: "logiq",
-    name: "LogIQ — Cloud-Native Anomaly Intelligence Engine",
+    name: "LogIQ: Cloud-Native Anomaly Intelligence Engine",
     shortName: "LogIQ",
     tier: 1,
     category: "Machine Learning / AI Engineering / Data Intelligence",
@@ -46,7 +46,7 @@ window.PORTFOLIO_PROJECTS = Object.freeze([
   },
   {
     id: "will-it-chart",
-    name: "Will It Chart — Hit-Song Prediction Engine",
+    name: "Will It Chart: Hit-Song Prediction Engine",
     shortName: "Will It Chart",
     tier: 1,
     category: "Machine Learning / Predictive Modeling / Music Data Analysis",
@@ -66,7 +66,7 @@ window.PORTFOLIO_PROJECTS = Object.freeze([
   },
   {
     id: "ghosthunt",
-    name: "GhostHunt — Fraudulent Job Posting Detector",
+    name: "GhostHunt: Fraudulent Job Posting Detector",
     shortName: "GhostHunt",
     tier: 1,
     category: "Machine Learning / NLP / Fraud Detection",
@@ -86,7 +86,7 @@ window.PORTFOLIO_PROJECTS = Object.freeze([
   },
   {
     id: "bubblebreak",
-    name: "BubbleBreak — Recommender Fairness Simulation",
+    name: "BubbleBreak: Recommender Fairness Simulation",
     shortName: "BubbleBreak",
     tier: 1,
     category: "Machine Learning / Recommender Systems / Algorithmic Fairness",
@@ -105,7 +105,7 @@ window.PORTFOLIO_PROJECTS = Object.freeze([
   },
   {
     id: "uxposed",
-    name: "UXposed — Dark-Pattern Detection & Compliance Analytics",
+    name: "UXposed: Dark-Pattern Detection & Compliance Analytics",
     shortName: "UXposed",
     tier: 1,
     category: "Data Analysis / NLP / Compliance-Oriented Analytics",
@@ -124,7 +124,7 @@ window.PORTFOLIO_PROJECTS = Object.freeze([
   },
   {
     id: "github-popularity",
-    name: "GitHub Repository Popularity — Multi-Dataset Statistical Analysis",
+    name: "GitHub Repository Popularity: Multi-Dataset Statistical Analysis",
     shortName: "Repository Popularity",
     tier: 2,
     category: "Data Analysis / Statistical Modeling",
@@ -161,7 +161,7 @@ window.PORTFOLIO_PROJECTS = Object.freeze([
   },
   {
     id: "micro",
-    name: "Micro — Adaptive AI Study Platform",
+    name: "Micro: Adaptive AI Study Platform",
     shortName: "Micro",
     tier: 2,
     category: "Data Science / Bayesian Modeling / Adaptive Learning",
@@ -179,7 +179,7 @@ window.PORTFOLIO_PROJECTS = Object.freeze([
   },
   {
     id: "drawquery",
-    name: "DrawQuery — Sketch-to-SQL Code Generation",
+    name: "DrawQuery: Sketch-to-SQL Code Generation",
     shortName: "DrawQuery",
     tier: 2,
     category: "AI / Computer Vision / Data Systems",
@@ -198,7 +198,7 @@ window.PORTFOLIO_PROJECTS = Object.freeze([
   },
   {
     id: "scenescript",
-    name: "SceneScript — Multimodal Video Summarization",
+    name: "SceneScript: Multimodal Video Summarization",
     shortName: "SceneScript",
     tier: 2,
     category: "Multimodal AI / Applied AI",
@@ -216,7 +216,7 @@ window.PORTFOLIO_PROJECTS = Object.freeze([
   },
   {
     id: "crispai",
-    name: "CrispAI — Real-Time Speech Enhancement",
+    name: "CrispAI: Real-Time Speech Enhancement",
     shortName: "CrispAI",
     tier: 2,
     category: "Applied AI / Speech Processing",
@@ -234,7 +234,7 @@ window.PORTFOLIO_PROJECTS = Object.freeze([
   },
   {
     id: "csci-5612-exoplanet",
-    name: "CSCI 5612 — Exoplanet Discovery & Habitability",
+    name: "CSCI 5612: Exoplanet Discovery & Habitability",
     shortName: "CSCI 5612 Exoplanets",
     tier: 2,
     category: "Machine Learning / Data Science / Scientific Data Analysis",
