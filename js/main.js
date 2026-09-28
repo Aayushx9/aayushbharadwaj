@@ -13,6 +13,14 @@
   const modal = document.querySelector("#project-modal");
   const modalContent = document.querySelector("#modal-content");
   const modalClose = document.querySelector(".modal-close");
+  const profileTrigger = document.querySelector(".profile-trigger");
+  const profileModal = document.querySelector("#profile-modal");
+  const profileFigure = document.querySelector("#profile-figure");
+  const profileClose = document.querySelector(".profile-modal-close");
+  // Profile photo source, relative to the page. Point this at another file to swap the portrait.
+  const PROFILE_IMAGE = "./assets/images/profile.jpg";
+  const profileFallback = `<div class="profile-fallback" role="img" aria-label="Profile photo area">AB</div>`;
+  let profileReturnFocus = null;
   const searchInput = document.querySelector("#project-search");
   const filterButtons = [...document.querySelectorAll(".filter-button")];
   const projectGrid = document.querySelector("#project-grid");
@@ -238,6 +246,15 @@
 
     navigation?.querySelectorAll("a").forEach((link) => link.addEventListener("click", closeMobileNavigation));
 
+    // The mobile panel no longer covers the page, so a tap outside dismisses it.
+    document.addEventListener("click", (event) => {
+      if (!navigation?.classList.contains("is-open")) return;
+      if (document.querySelector("dialog[open]")) return;
+      if (navigation.contains(event.target) || navToggle?.contains(event.target)) return;
+      closeMobileNavigation();
+      (lastFocusedTrigger || navToggle)?.focus();
+    });
+
     document.addEventListener("keydown", (event) => {
       if (event.key === "Escape" && navigation?.classList.contains("is-open")) {
         closeMobileNavigation();
@@ -288,6 +305,57 @@
     modal?.addEventListener("close", () => {
       document.body.style.overflow = "";
       if (modal._returnFocus instanceof HTMLElement) modal._returnFocus.focus();
+    });
+  };
+
+  const openProfile = () => {
+    if (!profileModal || !profileFigure) return;
+    profileFigure.innerHTML = PROFILE_IMAGE
+      ? `<img class="profile-photo" src="${escapeHTML(PROFILE_IMAGE)}" alt="Aayush Bharadwaj">`
+      : profileFallback;
+    profileReturnFocus = document.activeElement instanceof HTMLElement ? document.activeElement : profileTrigger;
+    if (typeof profileModal.showModal === "function") {
+      profileModal.showModal();
+    } else {
+      profileModal.setAttribute("open", "");
+    }
+    document.body.style.overflow = "hidden";
+    profileClose?.focus();
+  };
+
+  const closeProfile = () => {
+    if (!profileModal) return;
+    if (typeof profileModal.close === "function") profileModal.close();
+    else profileModal.removeAttribute("open");
+  };
+
+  const setupProfile = () => {
+    const brandPhoto = document.querySelector(".brand-photo");
+    brandPhoto?.addEventListener("error", () => {
+      const monogram = document.createElement("span");
+      monogram.setAttribute("aria-hidden", "true");
+      monogram.textContent = "AB";
+      brandPhoto.replaceWith(monogram);
+    });
+    profileTrigger?.addEventListener("click", openProfile);
+    profileClose?.addEventListener("click", closeProfile);
+    profileModal?.addEventListener("click", (event) => {
+      if (event.target === profileModal) closeProfile();
+    });
+    profileModal?.addEventListener("keydown", (event) => {
+      if (event.key === "Escape") closeProfile();
+    });
+    profileFigure?.addEventListener(
+      "error",
+      (event) => {
+        if (event.target.classList.contains("profile-photo")) profileFigure.innerHTML = profileFallback;
+      },
+      true
+    );
+    profileModal?.addEventListener("close", () => {
+      document.body.style.overflow = "";
+      if (profileReturnFocus instanceof HTMLElement) profileReturnFocus.focus();
+      profileReturnFocus = null;
     });
   };
 
@@ -361,6 +429,7 @@
   applyFilters();
   setupNavigation();
   setupModal();
+  setupProfile();
   setupImages();
   setupReveal();
 

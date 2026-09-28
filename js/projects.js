@@ -187,6 +187,7 @@ window.PORTFOLIO_PROJECTS = Object.freeze([
     description: "Vision-transformer system for converting hand-drawn ER diagrams into valid SQL DDL through an interactive Gradio interface.",
     metric: { value: "< 3 sec", label: "inference" },
     tags: ["Vision Transformer", "Sketch-to-SQL", "ER Diagrams", "SQL DDL", "Gradio"],
+    image: "./assets/images/projects/drawquery.webp",
     visual: "schema",
     details: {
       problem: "Translate hand-drawn database diagrams into structured SQL DDL.",

@@ -63,7 +63,7 @@ Project content lives in [`js/projects.js`](./js/projects.js). Each entry can in
 - `liveUrl` is optional and should only be used for a verified live project site
 - `visual` key for a generated CSS/SVG-style visual
 - `details` with any available `problem`, `approach`, `technology`, `results`, and `takeaway`
-- optional `image` and `imageAlt` fields
+- optional `image` and `imageAlt` fields for the primary project visual
 
 Do not add a GitHub URL unless the repository exists. The explorer automatically renders project cards and the details modal from this data.
 

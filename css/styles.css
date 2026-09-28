@@ -689,7 +689,7 @@ body::after {
   .nav-toggle[aria-expanded="true"] span:nth-child(1) { transform: translateY(6px) rotate(45deg); }
   .nav-toggle[aria-expanded="true"] span:nth-child(2) { opacity: 0; }
   .nav-toggle[aria-expanded="true"] span:nth-child(3) { transform: translateY(-6px) rotate(-45deg); }
-  .primary-nav { position: fixed; z-index: 101; inset: 0; display: flex; padding: 110px 30px 50px; flex-direction: column; align-items: stretch; gap: 0; background: rgba(5, 10, 20, .97); opacity: 0; visibility: hidden; transform: translateY(-12px); transition: opacity .25s, transform .25s, visibility .25s; }
+  .primary-nav { position: fixed; z-index: 101; top: calc(var(--header-height) + 10px); right: 18px; left: 18px; display: flex; max-height: calc(100svh - var(--header-height) - 20px); padding: 12px 22px 20px; overflow-y: auto; flex-direction: column; align-items: stretch; gap: 0; border: 1px solid var(--line-bright); border-radius: 16px; background: #0a1120; box-shadow: 0 34px 90px rgba(0, 0, 0, .62), 0 0 0 1px rgba(0, 0, 0, .45); opacity: 0; visibility: hidden; transform: translateY(-12px); transition: opacity .25s, transform .25s, visibility .25s; }
   .primary-nav.is-open { opacity: 1; visibility: visible; transform: translateY(0); }
   .primary-nav > a { padding: 16px 5px; border-bottom: 1px solid var(--line); color: #c3cede; font-family: var(--font-display); font-size: 18px; }
   .primary-nav .nav-resume { width: fit-content; margin-top: 24px; padding: 11px 15px; border: 1px solid var(--line-bright); }
@@ -1356,7 +1356,7 @@ body {
   .tier-key-value { font-size: 11px; }
   .modal-description { font-size: 14px; }
   .modal-section h3 { font-size: 11px; }
-  .modal-section p { font-size: 14px; }
+  .modal-section p { font-size: 16px; }
   .modal-section li { font-size: 11px; }
   .empty-state p { font-size: 14px; }
   .footer-inner { font-size: 11px; }
@@ -1372,5 +1372,218 @@ body {
   .schema-arrow { font-size: 10px; }
   .diagram-node strong { font-size: 10px; }
   .diagram-node small { font-size: 9px; }
+}
+
+/* Header breathing room: the whole row (avatar, name, nav) shifts down together.
+   One centered flex line, so alignment is preserved by construction.
+   Avatar size untouched; the bar grows only as much as that shift needs. */
+:root { --header-height: 86px; }
+.nav-wrap { padding-top: 6px; }
+
+/* Profile viewer: clickable AB mark plus a large portrait dialog. */
+.brand { gap: 16px; }
+.brand-mark { width: 72px; height: 72px; padding: 0; overflow: hidden; border-radius: 50%; cursor: pointer; transition: border-color .2s, box-shadow .2s, color .2s; }
+.brand-mark:hover { border-color: rgba(240, 90, 134, .95); color: white; box-shadow: inset 0 0 22px rgba(217, 47, 99, .16), 0 0 30px rgba(155, 109, 255, .26); }
+.brand-mark:active { transform: translateY(1px); }
+.brand-photo { width: 100%; height: 100%; border-radius: 50%; object-fit: cover; transform: scale(1.9); transform-origin: 50% 14%; transition: transform .25s var(--ease), filter .25s; }
+.brand-mark:hover .brand-photo, .brand-mark:focus-visible .brand-photo { transform: scale(2.02); filter: brightness(1.08) saturate(1.05); }
+.brand-name { transition: color .2s; }
+.brand-name:hover { color: white; }
+
+.profile-modal { width: min(560px, calc(100% - 32px)); max-height: calc(100svh - 32px); padding: 0; overflow: hidden; border: 1px solid var(--line-bright); border-radius: 18px; background: #0a1120; color: var(--text); box-shadow: 0 40px 120px rgba(0, 0, 0, .7); opacity: 0; transform: translateY(16px) scale(.98); transition: opacity .25s, transform .25s var(--ease), overlay .25s allow-discrete, display .25s allow-discrete; }
+.profile-modal[open] { opacity: 1; transform: translateY(0) scale(1); }
+@starting-style { .profile-modal[open] { opacity: 0; transform: translateY(16px) scale(.98); } }
+.profile-modal::backdrop { background: rgba(2, 5, 12, .86); backdrop-filter: blur(8px); }
+.profile-modal-inner { position: relative; padding: 16px; }
+.profile-modal .modal-close { position: absolute; top: 30px; right: 30px; float: none; margin: 0; }
+.profile-figure { display: grid; margin: 0; place-items: center; }
+.profile-fallback { display: grid; width: 100%; max-height: min(64svh, 460px); aspect-ratio: 1 / 1; place-items: center; border: 1px solid var(--line); border-radius: 14px; background: radial-gradient(circle at 50% 32%, rgba(155, 109, 255, .18), rgba(9, 14, 26, .96) 64%); color: var(--text); font-family: var(--font-display); font-size: clamp(58px, 15vw, 104px); font-weight: 800; letter-spacing: -.05em; }
+.profile-photo { display: block; max-width: 100%; max-height: min(70svh, 520px); width: auto; height: auto; object-fit: contain; border-radius: 14px; }
+.profile-caption { margin-top: 14px; color: var(--muted-2); font-family: var(--font-display); font-size: 10px; letter-spacing: .16em; text-align: center; text-transform: uppercase; }
+
+@media (max-width: 900px) {
+  :root { --header-height: 78px; }
+  .brand-mark { width: 58px; height: 58px; }
+  .brand { gap: 12px; }
+  .profile-modal { width: calc(100% - 24px); }
+  .profile-modal-inner { padding: 12px; }
+  .profile-modal .modal-close { top: 24px; right: 24px; }
+  .profile-fallback { max-height: min(56svh, 400px); }
+  .profile-photo { max-height: min(60svh, 440px); }
+}
+
+
+
+/* ==========================================================================
+   Readability pass. Typography only: no color, layout, spacing, or family
+   changes. Small and mid-size text grows by roughly 10 to 20 percent, with
+   small-screen values that never fall below the size used before.
+   ========================================================================== */
+
+/* Through-line and section descriptors */
+.eyebrow { font-size: 12px; }
+.hero-status { font-size: clamp(11px, .95vw, 13px); }
+.hero-email { font-size: 14px; }
+.visual-caption { font-size: 12px; }
+.section-kicker { font-size: 12px; }
+.capability-row { font-size: 12px; }
+.tier-key { font-size: 12px; }
+.tier-key-label,
+.tier-key-value { font-size: 13px; }
+
+/* Body copy */
+.hero-lede { font-size: 21px; }
+.section-heading > p,
+.body-copy,
+.research-copy > p:not(.eyebrow),
+.bridge-intro > p:not(.eyebrow) { font-size: 17px; }
+.contact-card > p:not(.eyebrow) { font-size: 17px; }
+.about-copy > p { font-size: 17px; }
+.project-description { font-size: 17px; }
+.card-description { font-size: 15px; }
+.foundation-copy p { font-size: 13px; }
+.research-item p { font-size: 15px; }
+.credential-card p { font-size: 14px; }
+.education-line small { font-size: 14px; }
+.org-line { font-size: 14px; }
+.text-link { font-size: 11px; }
+.empty-state p { font-size: 16px; }
+.pipeline-list li { font-size: 13px; }
+.pipeline-header,
+.pipeline-step { font-size: 11px; }
+.pipeline-meter { font-size: 12px; }
+
+/* Project and card metadata */
+.project-index,
+.project-badge { font-size: 12px; }
+.project-category { font-size: 13px; }
+.card-category { font-size: 12px; }
+.project-metric span { font-size: 12px; }
+.project-metric strong { font-size: 25px; }
+.project-tags span { font-size: 12px; }
+.external-note { font-size: 11px; }
+.foundation-index { font-size: 11px; }
+.foundation-meta span { font-size: 12px; }
+.research-number { font-size: 11px; }
+.research-item h3 { font-size: 19px; }
+.research-item a { font-size: 13px; }
+.bridge-label { font-size: 12px; }
+.bridge-column ul { font-size: 15px; }
+.bridge-arrow { font-size: 12px; }
+.credential-type { font-size: 12px; }
+.credential-card h3 { font-size: 17px; }
+.skill-index { font-size: 12px; }
+.skill-card li { font-size: 13px; }
+.education-line span,
+.education-line strong { font-size: 13px; }
+.contact-links a { font-size: 13px; }
+.contact-email { font-size: clamp(16px, 2.1vw, 21px); }
+.footer-inner { font-size: 13px; }
+.discipline-step strong { font-size: 17px; }
+.discipline-step small,
+.discipline-step > span { font-size: 12px; }
+.explorer-card h3 { font-size: 24px; }
+
+/* Controls */
+.button { font-size: 12px; }
+.project-link { font-size: 13px; }
+.project-link span { font-size: 13px; }
+.detail-button { font-size: 13px; }
+.foundation-row .detail-button { font-size: 12px; }
+.filter-button { font-size: 13px; }
+.search-field input { font-size: 15px; }
+.results-status { font-size: 13px; }
+.primary-nav > a { font-size: 15px; }
+
+/* Diagram micro labels */
+.diagram-node strong { font-size: 12px; }
+.diagram-node small { font-size: 11px; }
+.node-index { font-size: 12px; }
+.trace-label { font-size: 12px; }
+.network-node { font-size: 12px; }
+.mastery-label { font-size: 12px; }
+.schema-table strong { font-size: 12px; }
+.schema-arrow { font-size: 12px; }
+.anomaly-window::before { font-size: 12px; }
+.visual-code { font-size: 11px; }
+.visual-metric { font-size: 11px; }
+.visual-metric b { font-size: 14px; }
+.visual-topline,
+.visual-footer,
+.scroll-cue { font-size: 12px; }
+
+/* Modal and profile viewer */
+.modal-category { font-size: 13px; }
+.modal-description { font-size: 16px; }
+.modal-metric span { font-size: 12px; }
+.modal-section h3 { font-size: 13px; }
+.modal-section p { font-size: 16px; }
+.modal-section li { font-size: 13px; }
+.profile-caption { font-size: 11px; }
+
+@media (max-width: 900px) {
+  .hero-status { font-size: 12px; }
+  .hero-lede { font-size: 20px; }
+  .about-copy > p { font-size: 16px; }
+  .project-description { font-size: 16px; }
+  .card-description { font-size: 14px; }
+  .project-category { font-size: 12px; }
+  .section-kicker { font-size: 11px; }
+  .discipline-step strong { font-size: 16px; }
+  .primary-nav > a { font-size: 18px; }
+  .contact-email { font-size: clamp(16px, 4vw, 20px); }
+}
+
+@media (max-width: 640px) {
+  .hero-status { font-size: 12px; }
+  .eyebrow { font-size: 11px; }
+  .section-kicker { font-size: 11px; }
+  .capability-row { font-size: 11px; }
+  .hero-lede { font-size: 19px; }
+  .about-copy > p { font-size: 15px; }
+  .project-description { font-size: 16px; }
+  .card-description { font-size: 14px; }
+  .project-category { font-size: 12px; }
+  .discipline-step strong { font-size: 16px; }
+  .foundation-copy p { font-size: 12px; }
+  .education-line strong { font-size: 12px; }
+  .contact-links a { font-size: 12px; }
+  .contact-email { font-size: 15px; }
+  .footer-inner { font-size: 12px; }
+  .search-field input { font-size: 14px; }
+  .credential-card p { font-size: 13px; }
+  .skill-card li { font-size: 12px; }
+  .bridge-column ul { font-size: 14px; }
+  .research-item p { font-size: 14px; }
+  .empty-state p { font-size: 15px; }
+  .tier-key-value { font-size: 12px; }
+  .explorer-card h3 { font-size: 23px; }
+  .modal-category { font-size: 12px; }
+  .modal-description { font-size: 15px; }
+  .modal-section h3 { font-size: 12px; }
+  .modal-section p { font-size: 16px; }
+  .modal-section li { font-size: 12px; }
+  .project-link,
+  .detail-button,
+  .filter-button,
+  .foundation-row .detail-button { font-size: 12px; }
+  .diagram-node small { font-size: 10px; }
+  .schema-arrow { font-size: 11px; }
+}
+
+
+/* ==========================================================================
+   Large desktop only (1400px and up). In the 1180px content column the
+   foundation rows lost roughly 130px of title width to the tag and button
+   columns, so long titles broke word by word. Give the section column more
+   width and stack tags above the buttons in one right-hand column so the
+   title and description get the room. Nothing below 1400px is touched.
+   ========================================================================== */
+@media (min-width: 1400px) {
+  .foundations-section > .container { width: min(calc(100% - 96px), 1480px); }
+  .foundation-row { grid-template-columns: 32px minmax(0, 1fr) minmax(0, 240px); grid-template-rows: auto auto; gap: 10px 20px; }
+  .foundation-copy { grid-column: 2; grid-row: 1 / span 2; }
+  .foundation-meta { grid-column: 3; grid-row: 1; }
+  .foundation-actions { grid-column: 3; grid-row: 2; }
 }
 
