@@ -131,6 +131,7 @@ window.PORTFOLIO_PROJECTS = Object.freeze([
     categories: ["data-analysis", "statistics", "data-science"],
     description: "Multi-dataset statistical analysis of GitHub repository popularity using multiple linear regression and a negative binomial GLM.",
     tags: ["Multiple Linear Regression", "Negative Binomial GLM", "Count Modeling", "R²", "AIC", "ANOVA", "Kruskal-Wallis"],
+    github: "https://github.com/Aayushx9/Github-Repo-Popularity",
     visual: "regression",
     details: {
       problem: "Model and compare repository popularity using count-oriented statistical methods.",
